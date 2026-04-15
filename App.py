@@ -1,20 +1,13 @@
 import datetime
-import math
-
-# ==========================================
-# UNIT IV: OOP & SECURITY (The Vault Logic)
-# ==========================================
 class DigitalVault:
     def __init__(self, owner, master_pin):
         self.owner = owner
-        # Double underscores make these "Private" (Data Hiding)
         self.__master_pin = master_pin 
         self.__vault_records = {} 
 
     def add_record(self, label, secret_info):
         """Data Engineering: Captures and structures raw input."""
         timestamp = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-        # Storing as a Nested Dictionary (Unit II)
         self.__vault_records[label] = {
             "data": secret_info,
             "added_on": timestamp
@@ -23,7 +16,6 @@ class DigitalVault:
 
     def access_vault(self, input_pin):
         """Security Gateway: Authentication logic."""
-        # This is where 'Real' security happens
         if input_pin != self.__master_pin:
             print("❌ ACCESS DENIED: Identity could not be verified.")
             return False
@@ -36,16 +28,11 @@ class DigitalVault:
         for label, content in self.__vault_records.items():
             print(f"[{content['added_on']}] {label}: {content['data']}")
         return True
-
-# ==========================================
-# UNIT I & III: MAIN INTERFACE (Cloud Simulation)
-# ==========================================
 def main():
     print("🛡️  Cloud-Vault Initialization...")
     name = input("Set Vault Owner Name: ")
     pin = input("Set your Master PIN: ")
-    
-    # Create the object instance
+
     user_vault = DigitalVault(name, pin)
 
     while True:
